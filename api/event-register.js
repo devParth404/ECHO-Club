@@ -1,6 +1,7 @@
 const { google } = require("googleapis");
 
 export default async function handler(req, res) {
+
     // Only POST requests allowed
     if (req.method !== "POST") {
         return res.status(405).json({
@@ -10,13 +11,15 @@ export default async function handler(req, res) {
     }
 
     try {
+
         const {
             event,
             name,
             department,
             year,
             mobile,
-            email
+            email,
+            talent
         } = req.body || {};
 
         // Check required fields
@@ -25,7 +28,8 @@ export default async function handler(req, res) {
             !department ||
             !year ||
             !mobile ||
-            !email
+            !email ||
+            !talent
         ) {
             return res.status(400).json({
                 success: false,
@@ -41,6 +45,7 @@ export default async function handler(req, res) {
             process.env.GOOGLE_EVENT_SHEET_ID;
 
         if (!serviceAccountJson || !spreadsheetId) {
+
             console.error(
                 "Missing Google event registration environment variables"
             );
@@ -76,7 +81,7 @@ export default async function handler(req, res) {
             auth
         });
 
-        // Indian date & time
+        // Indian date and time
         const timestamp = new Date().toLocaleString("en-IN", {
             timeZone: "Asia/Kolkata"
         });
@@ -85,8 +90,8 @@ export default async function handler(req, res) {
         await sheets.spreadsheets.values.append({
             spreadsheetId: spreadsheetId.trim(),
 
-            // First sheet must be named Sheet1
-            range: "Sheet1!A:G",
+            // Sheet now has 8 columns
+            range: "Sheet1!A:H",
 
             valueInputOption: "USER_ENTERED",
 
@@ -101,7 +106,8 @@ export default async function handler(req, res) {
                         department.trim(),
                         year.trim(),
                         mobile.trim(),
-                        email.trim()
+                        email.trim(),
+                        talent.trim()
                     ]
                 ]
             }
@@ -111,7 +117,8 @@ export default async function handler(req, res) {
             "Event registration saved successfully:", {
                 event: event.trim(),
                 name: name.trim(),
-                email: email.trim()
+                email: email.trim(),
+                talent: talent.trim()
             }
         );
 
