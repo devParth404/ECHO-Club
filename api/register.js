@@ -1,7 +1,6 @@
 const { google } = require("googleapis");
 
 export default async function handler(req, res) {
-    // Only allow POST requests
     if (req.method !== "POST") {
         return res.status(405).json({
             success: false,
@@ -10,7 +9,6 @@ export default async function handler(req, res) {
     }
 
     try {
-        // Get registration data
         const {
             name,
             email,
@@ -19,7 +17,6 @@ export default async function handler(req, res) {
             interest
         } = req.body || {};
 
-        // Validate form data
         if (!name || !email || !phone || !department || !interest) {
             return res.status(400).json({
                 success: false,
@@ -27,13 +24,13 @@ export default async function handler(req, res) {
             });
         }
 
-        // Get Google credentials from Vercel Environment Variables
-        const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
-        const privateKey = process.env.GOOGLE_PRIVATE_KEY;
-        const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+        const serviceAccountJson =
+            process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
 
-        // Check environment variables
-        if (!clientEmail || !privateKey || !spreadsheetId) {
+        const spreadsheetId =
+            process.env.GOOGLE_SHEET_ID;
+
+        if (!serviceAccountJson || !spreadsheetId) {
             console.error("Missing Google environment variables");
 
             return res.status(500).json({
@@ -42,41 +39,39 @@ export default async function handler(req, res) {
             });
         }
 
-        // Fix Google private key formatting
-        const formattedPrivateKey = privateKey
+        // Parse complete Google service-account JSON
+        const credentials = JSON.parse(serviceAccountJson);
+
+        // Convert escaped newlines into real newlines
+        const privateKey = credentials.private_key
             .replace(/\\n/g, "\n")
-            .replace(/^"(.*)"$/s, "$1")
             .trim();
 
         // Authenticate with Google
         const auth = new google.auth.GoogleAuth({
             credentials: {
-                client_email: clientEmail.trim(),
-                private_key: formattedPrivateKey
+                client_email: credentials.client_email,
+                private_key: privateKey
             },
             scopes: [
                 "https://www.googleapis.com/auth/spreadsheets"
             ]
         });
 
-        // Google Sheets API
         const sheets = google.sheets({
             version: "v4",
             auth
         });
 
-        // Indian date and time
         const timestamp = new Date().toLocaleString("en-IN", {
             timeZone: "Asia/Kolkata"
         });
 
-        // Add registration to Google Sheet
         await sheets.spreadsheets.values.append({
             spreadsheetId: spreadsheetId.trim(),
             range: "Sheet1!A:F",
             valueInputOption: "USER_ENTERED",
             insertDataOption: "INSERT_ROWS",
-
             requestBody: {
                 values: [
                     [
@@ -93,7 +88,6 @@ export default async function handler(req, res) {
 
         console.log("Registration saved successfully:", {
             name: name.trim(),
-            email: email.trim(),
             interest: interest.trim()
         });
 
