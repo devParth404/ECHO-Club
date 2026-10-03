@@ -42,11 +42,17 @@ export default async function handler(req, res) {
             });
         }
 
+        // Fix Google private key formatting
+        const formattedPrivateKey = privateKey
+            .replace(/\\n/g, "\n")
+            .replace(/^"(.*)"$/s, "$1")
+            .trim();
+
         // Authenticate with Google
         const auth = new google.auth.GoogleAuth({
             credentials: {
-                client_email: clientEmail,
-                private_key: privateKey.replace(/\\n/g, "\n")
+                client_email: clientEmail.trim(),
+                private_key: formattedPrivateKey
             },
             scopes: [
                 "https://www.googleapis.com/auth/spreadsheets"
@@ -66,7 +72,7 @@ export default async function handler(req, res) {
 
         // Add registration to Google Sheet
         await sheets.spreadsheets.values.append({
-            spreadsheetId: spreadsheetId,
+            spreadsheetId: spreadsheetId.trim(),
             range: "Sheet1!A:F",
             valueInputOption: "USER_ENTERED",
             insertDataOption: "INSERT_ROWS",
