@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECHO Event Registration</title>
+    <meta name="description" content="ECHO Club Event Registration">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+         :root {
+            --navy: #050817;
+            --navy2: #08112c;
+            --yellow: #ffd83d;
+            --white: #f8f9ff;
+            --muted: #aab2cc;
+            --line: rgba(255, 255, 255, .11);
+            --glass: rgba(11, 19, 47, .68);
+            --shadow: 0 25px 80px rgba(0, 0, 0, .42);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        
+        html {
+            scroll-behavior: smooth
+        }
+        
+        body {
+            font-family: Inter, Arial, sans-serif;
+            color: var(--white);
+            background: var(--navy);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        body:before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 15% 10%, rgba(70, 102, 255, .16), transparent 28%), radial-gradient(circle at 85% 25%, rgba(255, 216, 61, .09), transparent 25%), radial-gradient(circle at 50% 80%, rgba(34, 83, 190, .16), transparent 32%), #050817;
+        }
+        
+        body:after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: .2;
+            background-image: linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+            background-size: 55px 55px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+        
+        .container {
+            width: min(1000px, 92%);
+            margin: auto
+        }
+        
+        nav {
+            position: sticky;
+            top: 14px;
+            z-index: 10;
+            width: min(1180px, 94%);
+            margin: 14px auto 0;
+            padding: 12px 16px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: rgba(5, 8, 23, .78);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, .25);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Space Grotesk";
+            font-weight: 800
+        }
+        
+        .logoMark {
+            width: 39px;
+            height: 39px;
+            border-radius: 12px;
+            background: var(--yellow);
+            overflow: hidden
+        }
+        
+        .logoMark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+        
+        .logo small {
+            display: block;
+            color: #8f99b8;
+            font: 500 8px Inter;
+            letter-spacing: 1.4px;
+            margin-top: 2px
+        }
+        
+        .back {
+            margin-left: auto;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            color: #dce1ef;
+            font-size: 12px
+        }
+        
+        main {
+            padding: 55px 0 90px
+        }
+        
+        .pageHead {
+            text-align: center;
+            margin-bottom: 35px
+        }
+        
+        .eyebrow {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: var(--yellow);
+            font-weight: 900;
+            margin-bottom: 10px
+        }
+        
+        h1 {
+            font: 700 clamp(36px, 6vw, 62px)/1 "Space Grotesk";
+            letter-spacing: -2px
+        }
+        
+        .pageHead p {
+            max-width: 650px;
+            margin: 14px auto 0;
+            color: var(--muted);
+            line-height: 1.8;
+            font-size: 13px
+        }
+        
+        .eventCard {
+            display: grid;
+            grid-template-columns: minmax(250px, 360px) 1fr;
+            gap: 34px;
+            align-items: center;
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: linear-gradient(145deg, rgba(20, 29, 66, .88), rgba(6, 10, 27, .92));
+            box-shadow: var(--shadow);
+            margin-bottom: 28px;
+        }
+        
+        .poster {
+            width: 100%;
+            aspect-ratio: 4/5;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .15);
+            box-shadow: 0 25px 65px rgba(0, 0, 0, .45);
+            background: #0b1230;
+        }
+        
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+        
+        .eventInfo h2 {
+            font: 700 clamp(30px, 4vw, 48px)/1 "Space Grotesk";
+            margin: 8px 0 15px
+        }
+        
+        .eventInfo h2 span {
+            color: var(--yellow)
+        }
+        
+        .eventDesc {
+            color: #aeb7cd;
+            font-size: 13px;
+            line-height: 1.85;
+            margin-bottom: 18px
+        }
+        
+        .details {
+            display: grid;
+            gap: 9px;
+            padding: 16px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--line);
+            color: #cbd2e2;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+        
+        .details b {
+            color: var(--yellow)
+        }
+        
+        .formCard {
+            padding: 32px;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            box-shadow: var(--shadow);
+        }
+        
+        .formTitle {
+            margin-bottom: 22px
+        }
+        
+        .formTitle h3 {
+            font: 700 27px "Space Grotesk"
+        }
+        
+        .formTitle p {
+            color: #8994ae;
+            font-size: 12px;
+            margin-top: 6px
+        }
+        
+        .formGrid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+        
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px
+        }
+        
+        .field.full {
+            grid-column: 1/-1
+        }
+        
+        label {
+            font-size: 10px;
+            color: #9ca6bf;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 0, 0, .18);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            color: #fff;
+            outline: none;
+        }
+        
+        select option {
+            background: #0a1028
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: rgba(255, 216, 61, .55);
+            box-shadow: 0 0 0 3px rgba(255, 216, 61, .06)
+        }
+        
+        .submit {
+            margin-top: 20px;
+            width: 100%;
+            padding: 15px;
+            border: 0;
+            border-radius: 13px;
+            background: var(--yellow);
+            color: #10162c;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        
+        .note {
+            text-align: center;
+            color: #737e99;
+            font-size: 10px;
+            margin-top: 12px
+        }
+        
+        .success {
+            display: none;
+            text-align: center;
+            padding: 28px 10px
+        }
+        
+        .success h3 {
+            color: var(--yellow);
+            font: 700 28px "Space Grotesk";
+            margin-bottom: 8px
+        }
+        
+        .success p {
+            color: #aeb7cc;
+            font-size: 13px;
+            line-height: 1.7
+        }
+        
+        @media(max-width:700px) {
+            .eventCard {
+                grid-template-columns: 1fr;
+                padding: 20px
+            }
+            .poster {
+                max-width: 330px;
+                margin: auto
+            }
+            .formGrid {
+                grid-template-columns: 1fr
+            }
+            .field.full {
+                grid-column: auto
+            }
+            .formCard {
+                padding: 22px
+            }
+            .logo small {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">
+            <span class="logoMark"><img src="echo-logo.png" alt="ECHO Logo"></span>
+            <span>ECHO<small>ENHANCING COMMUNICATION, HARMONY & ORATORY</small></span>
+        </a>
+        <a href="javascript:history.back()" class="back">← Back</a>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="pageHead">
+                <div class="eyebrow">ECHO CLUB • EVENT REGISTRATION</div>
+                <h1>Register for <span id="headEvent">ECHO</span>.</h1>
+                <p>Enter your details below to register for the selected ECHO event.</p>
+            </div>
+
+            <section class="eventCard">
+                <div class="poster">
+                    <img id="eventPoster" src="" alt="Event Poster">
+                </div>
+                <div class="eventInfo">
+                    <div class="eyebrow" id="eventEyebrow">FEATURED EVENT</div>
+                    <h2 id="eventTitle">ECHO <span>Event</span></h2>
+                    <p class="eventDesc" id="eventDesc"></p>
+                    <div class="details" id="eventDetails"></div>
+                </div>
+            </section>
+
+            <section class="formCard">
+                <div class="formTitle">
+                    <div class="eyebrow">01 / CANDIDATE DETAILS</div>
+                    <h3>Event Registration Form</h3>
+                    <p>Please enter your details correctly.</p>
+                </div>
+
+                <form id="registrationForm">
+                    <div class="formGrid">
+                        <div class="field">
+                            <label for="name">Name of Candidate</label>
+                            <input id="name" name="name" type="text" required aria-required="true" placeholder="Enter your full name">
+                        </div>
+
+                        <div class="field">
+                            <label for="department">Department of Candidate</label>
+                            <input id="department" name="department" type="text" required aria-required="true" placeholder="e.g. Data Science Engineering">
+                        </div>
+
+                        <div class="field">
+                            <label for="year">Year of Candidate</label>
+                            <select id="year" name="year" required aria-required="true">
+              <option value="">Select year</option>
+              <option>1st Year</option>
+              <option>2nd Year</option>
+              <option>3rd Year</option>
+              <option>4th Year</option>
+            </select>
+                        </div>
+
+                        <div class="field">
+                            <label for="mobile">Mobile Number</label>
+                            <input id="mobile" name="mobile" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required aria-required="true" placeholder="10-digit mobile number">
+                        </div>
+
+                        <div class="field full">
+                            <label for="email">E-mail</label>
+                            <input id="email" name="email" type="email" required aria-required="true" placeholder="you@example.com">
+                        </div>
+                    </div>
+
+                    <button class="submit" type="submit">SUBMIT REGISTRATION →</button>
+                    <div class="note">Your registration is for the event shown above.</div>
+                </form>
+
+                <div class="success" id="success">
+                    <h3>🎉 Registration Submitted!</h3>
+                    <p id="successText">Thank you for registering with ECHO Club.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const events = {
+            talent: {
+                title: "ECHO Got Talent",
+                eyebrow: "OPEN MIC • TALENT • EXPRESSION",
+                desc: "A stage for students to showcase their talent, creativity and confidence. Sing, perform, speak, create and let your voice be heard.",
+                poster: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85",
+                details: `
+      <div>📅 <b>Date:</b> Announced by ECHO Club</div>
+      <div>🕐 <b>Time:</b> Event schedule</div>
+      <div>📍 <b>Venue:</b> DYPCET Campus</div>
+      <div>🎤 <b>Format:</b> Open Mic & Talent Showcase</div>
+    `
+            },
+            ice: {
+                title: "Ice Breaking Session",
+                eyebrow: "CONNECT • COMMUNICATE • COLLABORATE",
+                desc: "An interactive experience designed to help students meet new people, break the hesitation and start building meaningful connections.",
+                poster: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85",
+                details: `
+      <div>📅 <b>Date:</b> Announced by ECHO Club</div>
+      <div>🕐 <b>Time:</b> Session schedule</div>
+      <div>📍 <b>Venue:</b> DYPCET Campus</div>
+      <div>🤝 <b>Focus:</b> Interaction & Team Building</div>
+    `
+            },
+            session: {
+                title: "Interactive Session",
+                eyebrow: "LEARN • SPEAK • GROW",
+                desc: "Engage in communication activities, discussions and practical experiences designed to strengthen confidence, expression and public speaking.",
+                poster: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=900&q=85",
+                details: `
+      <div>📅 <b>Date:</b> Announced by ECHO Club</div>
+      <div>🕐 <b>Time:</b> Session schedule</div>
+      <div>📍 <b>Venue:</b> DYPCET Campus</div>
+      <div>💬 <b>Focus:</b> Communication & Confidence</div>
+    `
+            },
+            recruitment: {
+                title: "ECHO Recruitment",
+                eyebrow: "JOIN • LEAD • CREATE",
+                desc: "Become part of the team behind ECHO and explore opportunities across management, media, PR, documentation and designing.",
+                poster: "https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=900&q=85",
+                details: `
+      <div>📅 <b>Date:</b> Recruitment schedule</div>
+      <div>🕐 <b>Time:</b> As announced</div>
+      <div>📍 <b>Venue:</b> DYPCET Campus</div>
+      <div>🚀 <b>Teams:</b> Management • Media • PR • Documentation • Designing</div>
+    `
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const key = params.get("event") || "talent";
+        const event = events[key] || events.talent;
+
+        document.title = `${event.title} | ECHO Registration`;
+        document.getElementById("headEvent").textContent = event.title;
+        document.getElementById("eventEyebrow").textContent = event.eyebrow;
+        document.getElementById("eventTitle").innerHTML =
+            event.title.replace("ECHO ", 'ECHO <span>') + (event.title.startsWith("ECHO ") ? "</span>" : "");
+        document.getElementById("eventDesc").textContent = event.desc;
+        document.getElementById("eventPoster").src = event.poster;
+        document.getElementById("eventDetails").innerHTML = event.details;
+
+        document.getElementById("registrationForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            // Every field is compulsory.
+            if (!this.checkValidity()) {
+                this.reportValidity();
+                return;
+            }
+
+            const name = document.getElementById("name").value.trim();
+            const department = document.getElementById("department").value.trim();
+            const year = document.getElementById("year").value;
+            const mobile = document.getElementById("mobile").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const submitButton = this.querySelector(".submit");
+
+            submitButton.disabled = true;
+            submitButton.textContent = "SUBMITTING...";
+
+            try {
+                const response = await fetch("/api/event-register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        event: event.title,
+                        name,
+                        department,
+                        year,
+                        mobile,
+                        email
+                    })
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || "Registration failed.");
+                }
+
+                document.getElementById("successText").textContent =
+                    `Thank you, ${name}. Your registration for ${event.title} has been submitted.`;
+
+                this.style.display = "none";
+                document.querySelector(".formTitle").style.display = "none";
+                document.querySelector(".note").style.display = "none";
+                document.getElementById("success").style.display = "block";
+            } catch (error) {
+                console.error("Event registration error:", error);
+                alert("Registration could not be submitted. Please try again.");
+                submitButton.disabled = false;
+                submitButton.textContent = "SUBMIT REGISTRATION →";
+            }
+        });
+    </script>
+</body>
+
+</html>
