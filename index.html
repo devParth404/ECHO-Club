@@ -2607,6 +2607,756 @@
             }
         }
     </style>
+
+    <style id="echo-universal-responsive">
+        /* =========================================================
+   ECHO CLUB — UNIVERSAL RESPONSIVE LAYER
+   Keeps the existing design/content but adapts it to:
+   phones, tablets, laptops, desktops and large screens.
+   ========================================================= */
+        
+        html {
+            width: 100%;
+            overflow-x: hidden;
+        }
+        
+        body {
+            width: 100%;
+            min-width: 0;
+            overflow-x: hidden;
+        }
+        
+        img,
+        video,
+        iframe,
+        canvas {
+            max-width: 100%;
+        }
+        
+        button,
+        input,
+        select,
+        textarea {
+            max-width: 100%;
+        }
+        /* ---------- Containers ---------- */
+        
+        .container {
+            width: min(1180px, calc(100% - 32px));
+            max-width: 1180px;
+        }
+        /* ---------- Navigation ---------- */
+        
+        nav {
+            width: min(1180px, calc(100% - 24px));
+            max-width: calc(100% - 24px);
+        }
+        
+        .logo {
+            min-width: 0;
+        }
+        
+        .logo>span:last-child {
+            min-width: 0;
+        }
+        
+        @media (max-width: 850px) {
+            nav {
+                padding: 10px 12px;
+                border-radius: 16px;
+            }
+            .links {
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+        }
+        
+        @media (max-width: 560px) {
+            nav {
+                top: 8px;
+                width: calc(100% - 16px);
+                max-width: calc(100% - 16px);
+            }
+            .logo {
+                gap: 7px;
+                font-size: 14px;
+            }
+            .logoMark {
+                width: 35px;
+                height: 35px;
+                border-radius: 10px;
+                flex: 0 0 35px;
+            }
+            .logo small {
+                display: none;
+            }
+            .menu {
+                font-size: 23px;
+            }
+            .links {
+                top: 58px;
+                left: 0;
+                right: 0;
+                width: 100%;
+                padding: 8px;
+            }
+        }
+        /* ---------- Sections / typography ---------- */
+        
+        section {
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .sectionHead,
+        .heroContent {
+            width: 100%;
+        }
+        
+        @media (max-width: 850px) {
+            section {
+                padding: 80px 0;
+            }
+            .sectionHead {
+                margin-bottom: 32px;
+            }
+            .sectionHead h2 {
+                font-size: clamp(32px, 7vw, 48px);
+                letter-spacing: -1.5px;
+            }
+            .hero {
+                min-height: auto;
+                padding-top: 90px;
+                padding-bottom: 20px;
+            }
+            .hero h1 {
+                font-size: clamp(58px, 17vw, 120px);
+                letter-spacing: -5px;
+                line-height: .85;
+            }
+            .hero .tag {
+                font-size: clamp(17px, 4vw, 24px);
+            }
+            .hero p {
+                width: min(650px, 100%);
+                font-size: 13px;
+                padding: 0 8px;
+            }
+        }
+        
+        @media (max-width: 560px) {
+            section {
+                padding: 65px 0;
+            }
+            .hero {
+                padding-top: 82px;
+                min-height: auto;
+            }
+            .hero h1 {
+                font-size: clamp(52px, 20vw, 88px);
+                letter-spacing: -4px;
+            }
+            .hero .tag {
+                margin-top: 20px;
+                font-size: 17px;
+            }
+            .hero p {
+                font-size: 12px;
+                line-height: 1.7;
+            }
+            .heroButtons {
+                width: 100%;
+                padding: 0 8px;
+            }
+            .heroButtons>* {
+                flex: 1 1 150px;
+                min-width: 0;
+            }
+            .eyebrow {
+                font-size: 9px;
+                letter-spacing: 2.5px;
+            }
+        }
+        /* ---------- Hero orbit ---------- */
+        
+        .micStage {
+            width: min(900px, 100%);
+            max-width: 100%;
+        }
+        
+        @media (max-width: 900px) {
+            .micStage {
+                width: 100%;
+                height: 460px;
+                margin: 0 auto -55px;
+                overflow: visible;
+            }
+            .orbitEvent {
+                width: 205px;
+                height: 145px;
+                margin: -72.5px 0 0 -102.5px;
+            }
+            .micBase {
+                width: 210px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .micStage {
+                height: 405px;
+                margin: -5px auto -35px;
+                transform: none !important;
+            }
+            .mic {
+                width: 78px;
+                height: 175px;
+                bottom: 38px;
+                margin-left: 0;
+            }
+            .mic:before {
+                left: 7px;
+                top: 9px;
+                width: 64px;
+                height: 102px;
+            }
+            .mic:after {
+                left: 35px;
+                bottom: -43px;
+                height: 52px;
+                width: 8px;
+            }
+            .micTop {
+                top: 43px;
+                font-size: 9px;
+                letter-spacing: 1.4px;
+            }
+            .micBase {
+                width: 175px;
+                height: 16px;
+                bottom: 2px;
+            }
+            .heroOrbitHint {
+                bottom: -2px;
+                font-size: 7px;
+                letter-spacing: 1.3px;
+            }
+            .orbitEvent {
+                width: 145px;
+                height: 105px;
+                margin: -52.5px 0 0 -72.5px;
+                border-radius: 15px;
+            }
+            .orbitEvent span {
+                bottom: 9px;
+                left: 10px;
+                right: 8px;
+            }
+            .orbitEvent b {
+                font-size: 10px;
+            }
+            .orbitEvent small {
+                font-size: 6.5px;
+            }
+            /* Smaller orbit radius prevents horizontal overflow */
+            @keyframes depthOrbit {
+                0% {
+                    transform: translate3d(0, -105px, -210px) scale(.52);
+                    opacity: .20;
+                    z-index: 1;
+                }
+                12.5% {
+                    transform: translate3d(82px, -74px, -145px) scale(.60);
+                    opacity: .42;
+                    z-index: 3;
+                }
+                25% {
+                    transform: translate3d(120px, 0, -45px) scale(.73);
+                    opacity: .72;
+                    z-index: 6;
+                }
+                37.5% {
+                    transform: translate3d(82px, 74px, 65px) scale(.88);
+                    opacity: 1;
+                    z-index: 12;
+                }
+                50% {
+                    transform: translate3d(0, 105px, 185px) scale(.98);
+                    opacity: 1;
+                    z-index: 30;
+                }
+                62.5% {
+                    transform: translate3d(-82px, 74px, 65px) scale(.88);
+                    opacity: 1;
+                    z-index: 12;
+                }
+                75% {
+                    transform: translate3d(-120px, 0, -45px) scale(.73);
+                    opacity: .72;
+                    z-index: 6;
+                }
+                87.5% {
+                    transform: translate3d(-82px, -74px, -145px) scale(.60);
+                    opacity: .42;
+                    z-index: 3;
+                }
+                100% {
+                    transform: translate3d(0, -105px, -210px) scale(.52);
+                    opacity: .20;
+                    z-index: 1;
+                }
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .micStage {
+                height: 375px;
+            }
+            .orbitEvent {
+                width: 128px;
+                height: 92px;
+                margin: -46px 0 0 -64px;
+            }
+            @keyframes depthOrbit {
+                0% {
+                    transform: translate3d(0, -94px, -190px) scale(.50);
+                    opacity: .18;
+                    z-index: 1;
+                }
+                12.5% {
+                    transform: translate3d(70px, -65px, -130px) scale(.57);
+                    opacity: .40;
+                    z-index: 3;
+                }
+                25% {
+                    transform: translate3d(101px, 0, -40px) scale(.68);
+                    opacity: .68;
+                    z-index: 6;
+                }
+                37.5% {
+                    transform: translate3d(70px, 65px, 58px) scale(.82);
+                    opacity: 1;
+                    z-index: 12;
+                }
+                50% {
+                    transform: translate3d(0, 94px, 165px) scale(.92);
+                    opacity: 1;
+                    z-index: 30;
+                }
+                62.5% {
+                    transform: translate3d(-70px, 65px, 58px) scale(.82);
+                    opacity: 1;
+                    z-index: 12;
+                }
+                75% {
+                    transform: translate3d(-101px, 0, -40px) scale(.68);
+                    opacity: .68;
+                    z-index: 6;
+                }
+                87.5% {
+                    transform: translate3d(-70px, -65px, -130px) scale(.57);
+                    opacity: .40;
+                    z-index: 3;
+                }
+                100% {
+                    transform: translate3d(0, -94px, -190px) scale(.50);
+                    opacity: .18;
+                    z-index: 1;
+                }
+            }
+        }
+        /* ---------- About / coordinator cards ---------- */
+        
+        .aboutGrid {
+            width: 100%;
+        }
+        
+        @media (max-width: 850px) {
+            .aboutGrid,
+            .coordinatorCard {
+                grid-template-columns: 1fr;
+            }
+            .aboutText {
+                padding: 28px;
+            }
+            .coordinatorCard {
+                padding: 30px;
+                gap: 25px;
+            }
+            .profile {
+                width: min(300px, 80vw);
+            }
+            .coordinatorInfo h3 {
+                font-size: clamp(30px, 7vw, 42px);
+            }
+        }
+        
+        @media (max-width: 560px) {
+            .aboutText {
+                padding: 22px;
+            }
+            .aboutText h3 {
+                font-size: 25px;
+            }
+            .aboutText p,
+            .coordinatorInfo p {
+                font-size: 13px;
+                line-height: 1.75;
+            }
+            .coordinatorCard {
+                padding: 20px;
+                border-radius: 22px;
+            }
+            .profile {
+                width: min(250px, 75vw);
+            }
+            .floatingWords {
+                justify-content: center;
+            }
+        }
+        /* ---------- Activities / events / statistics ---------- */
+        
+        @media (max-width: 900px) {
+            .activityGrid,
+            .eventGrid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .impact {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        
+        @media (max-width: 560px) {
+            .activityGrid,
+            .eventGrid,
+            .impact {
+                grid-template-columns: 1fr;
+            }
+            .activity {
+                min-height: 165px;
+                padding: 22px;
+            }
+            .event {
+                height: 250px;
+            }
+            .stat {
+                padding: 24px 15px;
+            }
+            .stat strong {
+                font-size: 36px;
+            }
+        }
+        /* ---------- Featured event ---------- */
+        
+        .eventShowcaseWrap {
+            width: 100%;
+            max-width: 1180px;
+        }
+        
+        .eventShowcase {
+            width: 100%;
+            min-width: 0;
+        }
+        
+        @media (max-width: 1000px) {
+            .eventShowcase {
+                grid-template-columns: 300px minmax(0, 1fr);
+                gap: 35px;
+                padding: 35px;
+            }
+        }
+        
+        @media (max-width: 760px) {
+            .eventShowcase {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                padding: 28px;
+                min-height: auto;
+            }
+            .eventPoster {
+                width: min(300px, 80vw);
+                height: min(335px, 90vw);
+                margin: 0 auto;
+                transform: rotateZ(-2deg);
+            }
+            .eventCopy {
+                max-width: 100%;
+                text-align: center;
+            }
+            .eventLive {
+                margin-inline: auto;
+            }
+            .eventEyebrow {
+                margin-top: 18px;
+            }
+            .eventCopy h2 {
+                font-size: clamp(42px, 11vw, 64px);
+            }
+            .eventMeta {
+                justify-content: center;
+                gap: 25px;
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 430px) {
+            .eventShowcase {
+                padding: 20px;
+                border-radius: 24px;
+            }
+            .eventPoster {
+                width: min(245px, 75vw);
+                height: min(295px, 92vw);
+            }
+            .eventCopy>p {
+                font-size: 12px;
+            }
+            .eventMeta {
+                gap: 18px;
+            }
+        }
+        /* ---------- Forms ---------- */
+        
+        .formWrap {
+            width: 100%;
+            max-width: 760px;
+        }
+        
+        .formGrid {
+            width: 100%;
+        }
+        
+        @media (max-width: 560px) {
+            .join {
+                padding: 45px 15px;
+            }
+            .join h2 {
+                font-size: clamp(38px, 12vw, 58px);
+                letter-spacing: -2px;
+            }
+            .formWrap {
+                padding: 20px;
+            }
+            .formGrid {
+                grid-template-columns: 1fr;
+            }
+            .field.full {
+                grid-column: auto;
+            }
+            .field input,
+            .field select {
+                min-height: 46px;
+                font-size: 16px;
+                /* prevents iOS zoom */
+            }
+            .formBtn {
+                min-height: 48px;
+            }
+        }
+        /* ---------- Mentor strip ---------- */
+        
+        .mentorViewport {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        @media (max-width: 560px) {
+            .mentorViewport {
+                padding: 12px;
+                border-radius: 18px;
+            }
+            .mentorCard {
+                width: 135px;
+                height: 185px;
+            }
+        }
+        /* ---------- Coordinator 3D orbit ---------- */
+        
+        .coordinatorStage {
+            width: 100%;
+            max-width: 100%;
+        }
+        
+        @media (max-width: 1000px) {
+            .coordinatorStage {
+                height: 570px;
+                transform: scale(.88);
+                transform-origin: center center;
+                margin: -25px 0 -30px;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            .coordinatorStage {
+                height: 500px;
+                transform: scale(.70);
+                margin: -60px 0 -70px;
+            }
+            .coordCard {
+                width: 165px;
+                height: 205px;
+                margin: -102.5px 0 0 -82.5px;
+            }
+            .ringOne {
+                width: 310px;
+                height: 310px;
+            }
+            .ringTwo {
+                width: 410px;
+                height: 410px;
+            }
+            .ringThree {
+                width: 520px;
+                height: 520px;
+            }
+        }
+        
+        @media (max-width: 430px) {
+            .coordinatorStage {
+                height: 430px;
+                transform: scale(.58);
+                margin: -80px 0 -105px;
+            }
+        }
+        /* ---------- Modals ---------- */
+        
+        .modal {
+            padding: 16px;
+        }
+        
+        .modalBox,
+        .modal .modalBox,
+        .modal .coordinatorModalBox,
+        .modal .specificEventBox {
+            box-sizing: border-box;
+            max-width: calc(100vw - 32px);
+            max-height: calc(100dvh - 32px);
+        }
+        
+        @media (max-width: 700px) {
+            .modal {
+                padding: 10px;
+            }
+            .modalBox,
+            .modal .modalBox,
+            .modal .coordinatorModalBox,
+            .modal .specificEventBox {
+                width: calc(100vw - 20px);
+                max-width: calc(100vw - 20px);
+                max-height: calc(100dvh - 20px);
+                min-height: 0;
+                padding: 20px;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+            .coordinatorModalBox,
+            .specificEventBox,
+            .eventModalBox {
+                grid-template-columns: 1fr !important;
+                gap: 18px !important;
+            }
+            .coordModalImage {
+                width: min(190px, 65vw);
+                height: 240px;
+                margin: 0 auto;
+            }
+            .specificImage {
+                height: min(270px, 65vw);
+            }
+            .modalPoster {
+                width: 165px;
+                height: 225px;
+                margin: 0 auto;
+            }
+            .modalEventInfo,
+            .coordModalInfo,
+            .specificInfo {
+                text-align: center;
+            }
+            .modalEventInfo .eventDetails,
+            .coordModalInfo .coordDetails,
+            .specificInfo .eventDetails {
+                text-align: left;
+            }
+            .close {
+                right: 12px;
+                top: 10px;
+                font-size: 22px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .modalBox,
+            .modal .modalBox,
+            .modal .coordinatorModalBox,
+            .modal .specificEventBox {
+                padding: 16px;
+            }
+            .modalBox h3 {
+                font-size: 23px;
+            }
+            .modalBox p {
+                font-size: 12px;
+            }
+        }
+        /* ---------- Footer ---------- */
+        
+        .footerGrid {
+            width: 100%;
+        }
+        
+        @media (max-width: 850px) {
+            .footerGrid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 560px) {
+            footer {
+                padding: 45px 0 20px;
+            }
+            .footerGrid {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            .copy {
+                flex-direction: column;
+                text-align: center;
+                align-items: center;
+            }
+        }
+        /* ---------- Touch devices ---------- */
+        
+        @media (hover: none) and (pointer: coarse) {
+            .eventShowcase:hover,
+            .event:hover img,
+            .activity:hover,
+            .mini:hover,
+            .orbitEvent:hover,
+            .coordCard:hover {
+                transform: none;
+            }
+            .eventShowcase:hover .eventPoster {
+                transform: rotateZ(-2deg);
+            }
+            .orbitEvent,
+            .coordCard {
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+        /* ---------- Accessibility / reduced motion ---------- */
+        
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
