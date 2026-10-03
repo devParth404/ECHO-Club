@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECHO Event | Moments That Echo</title>
+    <meta name="description" content="Explore an ECHO Club event, its story, information and memories.">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+        :root {
+            --navy: #050817;
+            --navy2: #08112c;
+            --yellow: #ffd83d;
+            --white: #f8f9ff;
+            --muted: #aab2cc;
+            --line: rgba(255, 255, 255, .11);
+            --glass: rgba(11, 19, 47, .58);
+            --shadow: 0 25px 80px rgba(0, 0, 0, .42);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: Inter, Arial, sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        body:before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            background: radial-gradient(circle at 15% 10%, rgba(70, 102, 255, .16), transparent 28%), radial-gradient(circle at 85% 25%, rgba(255, 216, 61, .09), transparent 25%), radial-gradient(circle at 50% 80%, rgba(34, 83, 190, .16), transparent 32%), #050817;
+        }
+        
+        body:after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            opacity: .2;
+            background-image: linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+            background-size: 55px 55px;
+            mask-image: linear-gradient(to bottom, black, transparent 85%);
+        }
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .container {
+            width: min(1160px, 92%);
+            margin: auto;
+        }
+        
+        nav {
+            position: fixed;
+            top: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1160px, 94%);
+            z-index: 1000;
+            padding: 12px 16px;
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            background: rgba(5, 8, 23, .78);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, .25);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Space Grotesk";
+            font-weight: 800;
+        }
+        
+        .logoMark {
+            width: 39px;
+            height: 39px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--yellow);
+            display: grid;
+            place-items: center;
+        }
+        
+        .logoMark img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .logo small {
+            display: block;
+            color: #8f99b8;
+            font: 500 8px Inter;
+            letter-spacing: 1.4px;
+            margin-top: 2px;
+        }
+        
+        .back {
+            margin-left: auto;
+            padding: 10px 14px;
+            border: 1px solid var(--line);
+            border-radius: 11px;
+            color: #cbd2e2;
+            font-size: 11px;
+            font-weight: 800;
+            transition: .25s;
+        }
+        
+        .back:hover {
+            color: #fff;
+            border-color: rgba(255, 216, 61, .4);
+            transform: translateY(-2px);
+        }
+        
+        .hero {
+            padding: 145px 0 80px;
+        }
+        
+        .heroGrid {
+            display: grid;
+            grid-template-columns: 1fr 1.05fr;
+            gap: 65px;
+            align-items: center;
+        }
+        
+        .poster {
+            height: 540px;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, .15);
+            background: #0b1230;
+            box-shadow: 35px 35px 100px rgba(0, 0, 0, .5);
+            transform: rotate(-2deg);
+            transition: .5s;
+        }
+        
+        .poster:hover {
+            transform: rotate(0deg) translateY(-5px);
+        }
+        
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: .82;
+        }
+        
+        .poster:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 35%, rgba(3, 6, 20, .92));
+        }
+        
+        .posterLabel {
+            position: absolute;
+            left: 25px;
+            right: 25px;
+            bottom: 24px;
+            z-index: 2;
+        }
+        
+        .posterLabel small {
+            color: var(--yellow);
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 9px;
+        }
+        
+        .posterLabel h2 {
+            margin-top: 8px;
+            font: 700 40px/.95 "Space Grotesk";
+        }
+        
+        .eyebrow {
+            color: var(--yellow);
+            font-size: 10px;
+            letter-spacing: 3px;
+            font-weight: 900;
+        }
+        
+        h1 {
+            margin: 16px 0 20px;
+            font: 700 clamp(50px, 7vw, 90px)/.9 "Space Grotesk";
+            letter-spacing: -4px;
+        }
+        
+        h1 span {
+            color: var(--yellow);
+        }
+        
+        .intro {
+            color: #aeb7cd;
+            line-height: 1.9;
+            font-size: 14px;
+            max-width: 650px;
+        }
+        
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 28px 0;
+        }
+        
+        .metaBox {
+            padding: 18px;
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            background: rgba(255, 255, 255, .035);
+        }
+        
+        .metaBox small {
+            display: block;
+            color: #68738f;
+            font-size: 8px;
+            letter-spacing: 1.5px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+        
+        .metaBox strong {
+            font-size: 12px;
+            color: #e7eaf3;
+        }
+        
+        .section {
+            padding: 80px 0;
+        }
+        
+        .sectionHead {
+            margin-bottom: 35px;
+        }
+        
+        .sectionHead .eyebrow {
+            margin-bottom: 10px;
+        }
+        
+        .sectionHead h2 {
+            font: 700 clamp(35px, 5vw, 58px) "Space Grotesk";
+            letter-spacing: -2px;
+        }
+        
+        .sectionHead p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 12px;
+            line-height: 1.8;
+        }
+        
+        .story {
+            border: 1px solid var(--line);
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border-radius: 25px;
+            padding: 30px;
+            line-height: 1.9;
+            color: #b7bfd2;
+            font-size: 14px;
+        }
+        
+        .memoryGrid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+        
+        .memory {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 22px;
+            border: 1px solid var(--line);
+            background: #0b1230;
+        }
+        
+        .memory img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: .5s;
+        }
+        
+        .memory:hover img {
+            transform: scale(1.06);
+        }
+        
+        .memory:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(transparent 35%, rgba(3, 6, 20, .95));
+        }
+        
+        .memoryText {
+            position: absolute;
+            z-index: 2;
+            left: 18px;
+            right: 18px;
+            bottom: 17px;
+        }
+        
+        .memoryText b {
+            font: 700 17px "Space Grotesk";
+        }
+        
+        .memoryText span {
+            display: block;
+            color: #aeb7cd;
+            font-size: 10px;
+            margin-top: 4px;
+        }
+        
+        .ctaArea {
+            padding: 70px 0 100px;
+            text-align: center;
+        }
+        
+        .ctaArea h2 {
+            font: 700 45px "Space Grotesk";
+        }
+        
+        .ctaArea p {
+            color: var(--muted);
+            margin: 12px auto 25px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 13px 19px;
+            border-radius: 12px;
+            background: var(--yellow);
+            color: #10162c;
+            font-weight: 900;
+            font-size: 11px;
+        }
+        
+        @media(max-width:800px) {
+            .heroGrid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+            .poster {
+                height: 430px;
+                max-width: 500px;
+                margin: auto;
+            }
+            .memoryGrid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media(max-width:560px) {
+            nav {
+                top: 8px;
+            }
+            .logo small {
+                display: none;
+            }
+            .hero {
+                padding-top: 115px;
+            }
+            .poster {
+                height: 380px;
+            }
+            .meta {
+                grid-template-columns: 1fr;
+            }
+            .memoryGrid {
+                grid-template-columns: 1fr;
+            }
+            .section {
+                padding: 60px 0;
+            }
+        }
+        
+        .siteFooter {
+            padding: 30px 0 36px;
+            margin-top: 40px;
+        }
+        
+        .footerLine {
+            height: 1px;
+            background: var(--line);
+            margin-bottom: 22px;
+        }
+        
+        .footerContent {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            color: var(--muted);
+            font-size: 13px;
+        }
+        
+        .footerContent strong {
+            display: block;
+            color: var(--white);
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .footerContent span {
+            display: block;
+        }
+        
+        .credits {
+            text-align: right;
+        }
+        
+        @media (max-width: 700px) {
+            .credits {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a class="logo" href="ECHO_Club_Final_Logo.html">
+            <span class="logoMark"><img src="echo-logo.png" alt="ECHO Logo"></span>
+            <span>ECHO<small>ENHANCING COMMUNICATION, HARMONY & ORATORY</small></span>
+        </a>
+        <a class="back" href="ECHO_Club_Final_Logo.html#events">← Back to Moments</a>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container heroGrid">
+                <div class="poster">
+                    <img id="heroImage" src="" alt="Event">
+                    <div class="posterLabel">
+                        <small id="heroEyebrow"></small>
+                        <h2 id="heroTitle"></h2>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="eyebrow">ECHO EVENT • MOMENTS THAT ECHO</div>
+                    <h1 id="title">ECHO <span>Event</span></h1>
+                    <p class="intro" id="desc"></p>
+
+                    <div class="meta">
+                        <div class="metaBox"><small>DATE</small><strong id="date"></strong></div>
+                        <div class="metaBox"><small>TIME</small><strong id="time"></strong></div>
+                        <div class="metaBox"><small>VENUE</small><strong id="venue"></strong></div>
+                        <div class="metaBox"><small>FORMAT</small><strong id="format"></strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="sectionHead">
+                    <div class="eyebrow">01 / ABOUT THE EVENT</div>
+                    <h2>The Story Behind It.</h2>
+                </div>
+                <div class="story" id="story"></div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="sectionHead">
+                    <div class="eyebrow">02 / MEMORIES</div>
+                    <h2>Memories That Echo.</h2>
+                    <p>A visual collection from the event.</p>
+                </div>
+                <div class="memoryGrid" id="memoryGrid"></div>
+            </div>
+        </section>
+
+
+    </main>
+
+
+    <footer class="siteFooter">
+        <div class="container">
+            <div class="footerLine"></div>
+            <div class="footerContent">
+                <div>
+                    <strong>ECHO Club</strong>
+                    <span>Enhancing Communication, Harmony &amp; Oratory</span>
+                </div>
+                <div class="credits">
+                    <span>© 2026 ECHO Club, DYPCET. All Rights Reserved.</span>
+                    <span>Designed &amp; Developed by ECHO Club Documentation &amp; Designing Team.</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const events = {
+            talent: {
+                title: "ECHO Got Talent",
+                eyebrow: "OPEN MIC • TALENT • EXPRESSION",
+                desc: "A stage for students to showcase their talent, creativity and confidence. Sing, perform, speak, create and let your voice be heard.",
+                img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=90",
+                date: "Announced by ECHO Club",
+                time: "Event schedule",
+                venue: "DYPCET Campus",
+                format: "Open Mic & Talent Showcase",
+                story: "ECHO Got Talent is an open stage created for students who want to express themselves beyond the classroom. The event brings together music, performance, creativity, confidence and communication in one shared space. Participants get an opportunity to step forward, present their talent and connect with an audience through their own expression.",
+                memories: [
+                    ["Performance Moments", "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=900&q=85"],
+                    ["On the Stage", "https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=900&q=85"],
+                    ["Audience & Energy", "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=900&q=85"]
+                ]
+            },
+            ice: {
+                title: "Ice Breaking Session",
+                eyebrow: "CONNECT • COMMUNICATE • COLLABORATE",
+                desc: "An interactive experience designed to help students meet new people, break hesitation and start building meaningful connections.",
+                img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1200&q=90",
+                date: "Announced by ECHO Club",
+                time: "Session schedule",
+                venue: "DYPCET Campus",
+                format: "Interaction & Team Building",
+                story: "The Ice Breaking Session is designed to make the first interaction easier. Through activities, conversations and team-based experiences, students can move beyond hesitation, communicate with new people and begin building a stronger sense of community.",
+                memories: [
+                    ["Team Connections", "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=900&q=85"],
+                    ["Together We Connect", "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=900&q=85"],
+                    ["Activity Moments", "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85"]
+                ]
+            },
+            session: {
+                title: "Interactive Sessions",
+                eyebrow: "LEARN • SPEAK • GROW",
+                desc: "Engage in communication activities, discussions and practical experiences designed to strengthen confidence, expression and public speaking.",
+                img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=90",
+                date: "Announced by ECHO Club",
+                time: "Session schedule",
+                venue: "DYPCET Campus",
+                format: "Communication & Confidence",
+                story: "Interactive Sessions turn communication into an experience. Students participate in discussions, activities and practical exercises that encourage speaking, listening, collaboration and confident expression.",
+                memories: [
+                    ["Learning Together", "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=900&q=85"],
+                    ["Discussion Moments", "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=85"],
+                    ["Ideas in Action", "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85"]
+                ]
+            }
+        };
+
+        const key = new URLSearchParams(location.search).get("event") || "talent";
+        const data = events[key] || events.talent;
+
+        document.title = `${data.title} | ECHO Club`;
+        document.getElementById("title").innerHTML = data.title.replace(" ", " <span>") + "</span>";
+        document.getElementById("heroTitle").textContent = data.title;
+        document.getElementById("heroEyebrow").textContent = data.eyebrow;
+        document.getElementById("heroImage").src = data.img;
+        document.getElementById("desc").textContent = data.desc;
+        document.getElementById("date").textContent = data.date;
+        document.getElementById("time").textContent = data.time;
+        document.getElementById("venue").textContent = data.venue;
+        document.getElementById("format").textContent = data.format;
+        document.getElementById("story").textContent = data.story;
+
+        document.getElementById("memoryGrid").innerHTML = data.memories.map((m) => `
+    <div class="memory">
+        <img src="${m[1]}" alt="${m[0]}">
+    </div>
+`).join("");
+    </script>
+</body>
+
+</html>
