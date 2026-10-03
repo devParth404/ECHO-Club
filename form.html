@@ -412,6 +412,23 @@
                             <label for="email">E-mail</label>
                             <input id="email" name="email" type="email" required aria-required="true" placeholder="you@example.com">
                         </div>
+
+                        <div class="field full">
+                            <label for="talent">What is your talent?</label>
+                            <select id="talent" name="talent" required aria-required="true">
+                                <option value="">Select your talent</option>
+                                <option value="Singing">🎤 Singing</option>
+                                <option value="Dance">💃 Dance</option>
+                                <option value="Stand-up Comedy">🎙️ Stand-up Comedy</option>
+                                <option value="Poetry">📝 Poetry</option>
+                                <option value="Instrument Playing">🎸 Instrument Playing</option>
+                                <option value="Rap">🎵 Rap</option>
+                                <option value="Mimicry">🎭 Mimicry</option>
+                                <option value="Magic">✨ Magic</option>
+                                <option value="Acting / Monologue">🎬 Acting / Monologue</option>
+                                <option value="Other">🪕 Other</option>
+                            </select>
+                        </div>
                     </div>
 
                     <button class="submit" type="submit">SUBMIT REGISTRATION →</button>
@@ -505,6 +522,7 @@
             const year = document.getElementById("year").value;
             const mobile = document.getElementById("mobile").value.trim();
             const email = document.getElementById("email").value.trim();
+            const talent = document.getElementById("talent").value;
             const submitButton = this.querySelector(".submit");
 
             submitButton.disabled = true;
@@ -522,7 +540,8 @@
                         department,
                         year,
                         mobile,
-                        email
+                        email,
+                        talent
                     })
                 });
 
